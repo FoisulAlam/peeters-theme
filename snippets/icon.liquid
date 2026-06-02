@@ -1,0 +1,17 @@
+            {% if icon != blank %}
+                {{
+            icon
+            | image_url: width: 800
+            | image_tag:
+                class: 'product-icon__image',
+                alt: alt_text,
+                loading: 'lazy',
+                fetchpriority: 'auto',
+                decoding: 'async',
+                widths: '200, 300, 400, 600, 800',
+                sizes: '(max-width: 749px) 100vw, 400px'
+            }}
+                {% else %}
+                    {{ 'hero-apparel-1' | placeholder_svg_tag: 'placeholder-svg-our' }}
+            {% endif %}
+          

@@ -1,0 +1,27 @@
+            {% if media != blank %}
+
+            {% capture media_style %}
+            
+            border-radius: {{ border_radius }}px;
+            aspect-ratio: {{ aspect_ratio }};
+            object-fit: {{ object_fit }};
+            height: auto;
+            
+            {% endcapture %}
+
+            {{
+            media
+            | image_url: width: 800
+            | image_tag:
+                class: 'product-media__image',
+                alt: alt_text,
+                loading: 'lazy',
+                fetchpriority: 'auto',
+                decoding: 'async',
+                widths: '200, 300, 400, 600, 800',
+                sizes: '(max-width: 749px) 100vw, 400px',
+                style: media_style
+            }}
+            {% else %}
+                {{ 'hero-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
+            {% endif %}

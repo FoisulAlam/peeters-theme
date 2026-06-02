@@ -1,19 +1,89 @@
+{% liquid
+    assign title = section.settings.title
+    assign sub_title = section.settings.sub_title
+    assign description = section.settings.content
+
+    capture allcontent
+    echo '<h2>' | append: title | append: '</h2>'
+    echo '<h3>' | append: sub_title | append: '</h3>'
+    echo '<p>' | append: description | append: '</p>'
+    endcapture
+%}
+
 <div class="custom-style">
-    <p>
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Itaque, esse inventore. Eaque beatae, repudiandae ea, laudantium atque possimus optio obcaecati voluptates aut voluptas eveniet quod expedita in animi, aliquam porro!
-    </p>
+
+    {{ allcontent }}
+
+    {% for block in section.blocks %}
+
+        <ul class="block_ul">
+            <li>
+                {{ block.settings.block_text }}
+            </li>
+        </ul>
+    {% endfor %}
+
+
+
 </div>
 
 
-
+{% style %}
+    .custom-style {
+        width: 1000px;
+        margin: 200px auto;
+    }
+    .block_ul {
+        list-style: none;
+        display: flex;
+        gap: 20px;
+    }
+{% endstyle %}
 
 {% schema %}
 {
     "name": "Custom Code",
     "tag": "section",
-    "class": "custom-code",
-    "blocks": [],
+    "class": "custom_code",
+    "disabled_on": {
+        "groups": ["header", "footer"]
+    },
+    "blocks": [
+        {
+            "type": "text",
+            "name": "Text",
+            "settings": [
+                {
+                    "type": "text",
+                    "id": "block_text",
+                    "label": "Block Texts",
+                    "default": "This is the Block Text"
+
+
+                }
+            ]
+        }
+    ],
     "settings": [
+
+    {
+        "type": "text",
+        "id": "title",
+        "label": "Title",
+        "default": "This is The Title"
+    },
+    {
+        "type": "inline_richtext",
+        "id": "sub_title",
+        "label": "Sub Title",
+        "default": "This is the Sub Title"
+    },
+    {
+        "type": "richtext",
+        "id": "content",
+        "label": "Description",
+        "default": "<p> This is the description. This is the description. This is the description. This is the description. This is the description. This is the description. This is the description.This is the description.This is the description.This is the description. This is the description. This is the description. This is the description. This is the description. This is the description. This is the description. This is the description.This is the description.This is the description.This is the description. </p>"
+    }
         
         ],
         "presets": [
