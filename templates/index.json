@@ -11,6 +11,24 @@
   "sections": {
     "hero_banner_AzmAYw": {
       "type": "hero-banner",
+      "blocks": {
+        "slide_DhrR7t": {
+          "type": "slide",
+          "settings": {
+            "slide": "shopify://shop_images/Peeters_Tweewielers_sRGB-18_1.png"
+          }
+        },
+        "slide_VAVrwT": {
+          "type": "slide",
+          "settings": {
+            "slide": "shopify://shop_images/Peeters-hero-2.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "slide_DhrR7t",
+        "slide_VAVrwT"
+      ],
       "name": "Hero Banner",
       "settings": {
         "hero_heading": "We love cycling",
