@@ -1,0 +1,582 @@
+{{ 'hero-banner.css' | asset_url | stylesheet_tag }}
+
+
+
+
+
+{% liquid
+  assign hero_heading = section.settings.hero_heading
+  assign hero_heading_size = section.settings.hero_heading_size
+  assign hero_heading_color = section.settings.hero_heading_color
+  assign hero_heading_width = section.settings.hero_heading_width
+
+  assign hero_sub_heading = section.settings.hero_Sub_Heading
+  assign hero_sub_heading_size = section.settings.hero_sub_heading_size
+  assign hero_sub_heading_color = section.settings.hero_sub_heading_color
+  assign hero_sub_heading_width = section.settings.hero_sub_heading_width
+  assign hero_sub_heading_line_height = section.settings.hero_sub_heading_line_height
+
+  assign feature_button_bg_1 = section.settings.feature_button_bg_1
+  assign feature_button_radius_1 = section.settings.feature_button_radius_1
+  assign feature_button_padding_2 = section.settings.feature_button_padding_2
+  assign feature_button_padding_1 = section.settings.feature_button_padding_1
+  assign feature_button_text_1 = section.settings.feature_button_text_1
+  assign feature_button_text_color_1 = section.settings.feature_button_text_color_1
+  assign feature_button_icon_1 = section.settings.feature_button_icon_1
+  assign hero_features_button_gap = section.settings.hero_features_button_gap
+
+  assign feature_button_bg_2 = section.settings.feature_button_bg_2
+  assign feature_button_radius_2 = section.settings.feature_button_radius_2
+  assign feature_button_text_2 = section.settings.feature_button_text_2
+  assign feature_button_text_color_2 = section.settings.feature_button_text_color_2
+  assign feature_button_icon_2 = section.settings.feature_button_icon_2
+
+  assign search_bar_bg = section.settings.search_bar_bg
+  assign search_bar_radius = section.settings.search_bar_radius
+  assign search_bar_icon = section.settings.search_bar_icon
+  assign search_bar_padding = section.settings.search_bar_padding
+  assign search_bar_text = section.settings.search_bar_text
+
+  assign search_bar_button_bg = section.settings.search_bar_button_bg
+  assign search_bar_button_radius = section.settings.search_bar_button_radius
+  assign search_bar_button_padding = section.settings.search_bar_button_padding
+  assign search_bar_button_text = section.settings.search_bar_button_text
+  assign search_bar_button_text_color = section.settings.search_bar_button_text_color
+  assign search_bar_button_icon = section.settings.search_bar_button_icon
+  assign section_width = section.settings.section_width
+  assign slide_radius = section.settings.slide_radius
+  assign slider_width = section.settings.slider_width
+  assign slider_height = section.settings.slider_height
+%}
+
+  
+
+
+
+<section class="hero-banner color-{{ section.settings.color_scheme }} gradient" style=" --hero_heading_size: {{ hero_heading_size }}px; --hero_heading_color: {{ hero_heading_color }}; --hero_heading_width: {{ hero_heading_width }}px; --hero_sub_heading_size: {{ hero_sub_heading_size }}px; --hero_sub_heading_line_height: {{ hero_sub_heading_line_height }}%; --hero_sub_heading_color: {{ hero_sub_heading_color }}; --hero_sub_heading_width: {{ hero_sub_heading_width }}px; --feature_button_bg_1: {{ feature_button_bg_1 }}; --feature_button_radius_1: {{ feature_button_radius_1 }}px; --feature_button_text_color_1: {{ feature_button_text_color_1 }}; --feature_button_bg_2: {{ feature_button_bg_2 }}; --feature_button_radius_2: {{ feature_button_radius_2 }}px; --feature_button_text_color_2: {{ feature_button_text_color_2 }}; --feature_button_padding_1: {{ feature_button_padding_1 }}px; --feature_button_padding_2: {{ feature_button_padding_2 }}px; --hero_features_button_gap:  {{ hero_features_button_gap }}px; --section_width: {{ section_width }}; --search_bar_padding: {{ search_bar_padding }}px; --search_bar_bg: {{ search_bar_bg }}; --search_bar_radius: {{ search_bar_radius }}px; --search_bar_button_bg: {{ search_bar_button_bg }}; --search_bar_button_radius: {{ search_bar_button_radius }}px; --search_bar_button_padding: {{ search_bar_button_padding }}px; --search_bar_button_text_color: {{ search_bar_button_text_color }}; --slide_radius: {{ slide_radius }}px; --slider_height: {{ slider_height }}px; ">
+
+<div class="hero-banner-slide" >
+
+    <div class="swiper hero-swiper-{{ section.id }}">
+    <div class="swiper-wrapper">
+    {% for block in section.blocks %}
+        {% liquid
+            assign slide = block.settings.slide
+        %}
+      <div class="swiper-slide slide">
+
+        {% if slide %}
+            {{ slide
+            |  image_url: width: 1600
+            |  image_tag:
+            loading: 'lazy',
+            fetchpriority: 'high',
+            class: 'slide_image'        
+            }}
+            {%  else %}
+            {{ 'hero-apparel-1' | placeholder_svg_tag: 'slide_image' }}
+        {% endif %}
+         </div>
+    {% endfor %}
+       </div>
+  </div>
+</div>
+
+
+<div class="hero-banner-content">
+    <div class="page-width">
+
+    <div class="hero-header-feature-search-container">
+
+    <div class="hero-header">
+        {% if hero_heading != blank %}
+            <h2 class="heading">
+                {{ hero_heading }}
+            </h2>
+        {% endif %}
+       
+        {% if hero_sub_heading %}
+            <p class="sub-heading">
+                {{ hero_sub_heading }}
+            </p>
+        {% endif %}
+    </div>
+  
+    <div class="feature-buttons-and-search-bar">
+        <div class="hero-feature-buttons">
+
+            {% if feature_button_text_1 != blank %}
+            <div class="feature-button-1">
+                {% if feature_button_icon_1 %}
+                    {{ feature_button_icon_1 
+                    |  image_url: width: 20
+                    |  image_tag:
+                    fetchpriority: 'high',
+                    loading: 'lazy',
+                    class: 'feature_icon_1'
+                    
+                    }}
+                {% endif %}
+
+                {% if feature_button_text_1 %}
+                   <p class="feature-button-text-1">
+                     {{ feature_button_text_1 }}
+                   </p>
+                {% endif %}
+            </div>
+            {% endif %}
+
+            {% if feature_button_text_2 != blank %}
+            <div class="feature-button-2">
+                {% if feature_button_icon_2 %}
+                    {{ feature_button_icon_2 
+                    |  image_url: width: 20
+                    |  image_tag:
+                    fetchpriority: 'high',
+                    loading: 'lazy',
+                    class: 'feature_icon_2'
+                    
+                    }}
+                {% endif %}
+
+                {% if feature_button_text_2 %}
+                   <p class="feature-button-text-2">
+                     {{ feature_button_text_2 }}
+                   </p>
+                {% endif %}
+            </div>
+              {% endif %}
+        </div>
+
+        <div class="search-bar-container">
+                <div class="icon_and_heading">
+                    {% if search_bar_icon %}
+                        {{ search_bar_icon 
+                        |  image_url: width: 50
+                        |  image_tag:
+                        fetchpriority: 'high',
+                        loading: 'lazy',
+                        class: 'search_bar_icon' 
+                        
+                        }}
+                    {% endif %}
+
+                    {% if search_bar_text %}
+                        <h3 class="search-bar-heading">
+                            {{ search_bar_text }}
+                        </h3>
+                    {% endif %}
+
+                </div>
+
+                <div class="search-bar-button">
+                      {% if search_bar_button_text %}
+                        <p class="search_bar_button_text">
+                            {{ search_bar_button_text }}
+                        </p>
+                    {% endif %}
+
+                    {% if search_bar_button_icon %}
+                        {{ search_bar_button_icon
+                        |  image_url: width: 20
+                        |  image_tag:
+                        fetchpriority: 'high',
+                        loading: 'lazy',
+                        class: 'search_bar_button_icon' 
+                        }}
+                    {% endif %}
+                </div>
+        </div>
+    </div>
+
+    </div>
+
+    </div>
+</div>
+
+</section>
+
+  <script>
+    (function () {
+      function initHeroSwiper() {
+        var slider = document.querySelector('.hero-swiper-{{ section.id }}');
+
+        if (!slider || typeof Swiper === 'undefined') return;
+        if (slider.swiper) slider.swiper.destroy(true, true);
+
+        new Swiper(slider, {
+        speed: 2000,
+        autoplay: {
+        delay: 2500,
+        disableOnInteraction: false,
+      },
+        });
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initHeroSwiper);
+      } else {
+        initHeroSwiper();
+      }
+
+      document.addEventListener('shopify:section:load', function (event) {
+        if (event.detail.sectionId === '{{ section.id }}') initHeroSwiper();
+      });
+    })();
+  </script>
+
+{% schema %}
+{
+    "name": "Hero Banner",
+    "class": "hero_section",
+    "tag": "section",
+    "disabled_on": {
+        "groups": ["header", "footer", "aside"]
+    },
+    "settings": [
+
+        {
+            "type": "header",
+            "content": "Heading & Styles"
+        },
+        {
+            "type": "inline_richtext",
+            "id": "hero_heading",
+            "label": "Hero Heading",
+            "default": "We love cycling"
+        },
+        {
+            "type": "range",
+            "id": "hero_heading_size",
+            "label": "Hero Heading Size",
+            "max": 60,
+            "min": 40,
+            "default": 55,
+            "step": 5
+        },
+        {
+            "type": "color",
+            "id": "hero_heading_color",
+            "label": "Hero Heading Color",
+            "default": "#FFFFFF"
+        },
+        {
+            "type": "range",
+            "id": "hero_heading_width",
+            "label": "Hero Hheading Width",
+            "max": 460,
+            "min": 240,
+            "default": 460,
+            "step": 20
+        },
+        {
+            "type": "header",
+            "content": "Sub-Heading & Styles"
+        },
+        {
+            "type": "textarea",
+            "id": "hero_Sub_Heading",
+            "label": "Hero Sub_Heading",
+            "default": "Ultimate cycling pleasure through optimal service, quality, and craftsmanship. That is our top priority!"
+        },
+        {
+            "type": "range",
+            "id": "hero_sub_heading_size",
+            "label": "Hero Heading Size",
+            "max": 40,
+            "min": 22,
+            "default": 28,
+            "step": 1
+        },
+        {
+            "type": "color",
+            "id": "hero_sub_heading_color",
+            "label": "Hero Sub Heading Color",
+            "default": "#FFFFFF"
+        },
+        {
+            "type": "range",
+            "id": "hero_sub_heading_width",
+            "label": "Hero Sub heading Width",
+            "max": 440,
+            "min": 240,
+            "default": 400,
+            "step": 20
+        },
+        {
+            "type": "range",
+            "id": "hero_sub_heading_line_height",
+            "label": "Hero Sub Heading Line Height",
+            "min": 80,
+            "max": 300,
+            "step": 5,
+            "default": 160,
+            "unit": "%"
+        },
+
+         {
+            "type": "header",
+            "content": "Features Buttons & Styles"
+        },
+        {
+            "type": "color",
+            "id": "feature_button_bg_1",
+            "label": "Feature Button BG Color",
+            "default": "#52B099"
+        },
+        {
+            "type": "range",
+            "id": "feature_button_radius_1",
+            "label": "Feature Button Radius 1",
+            "max": 40,
+            "min": 0,
+            "default": 12,
+            "step": 1
+        },
+        {
+            "type": "range",
+            "id": "feature_button_padding_1",
+            "label": "Feature Button Padding 1",
+            "max": 40,
+            "min": 0,
+            "default": 12,
+            "step": 1
+        },
+
+        {
+            "type": "text",
+            "id": "feature_button_text_1",
+            "label": "Feature Button Text 1",
+            "default": "Schedule a consultation"
+        },
+        
+        {
+            "type": "color",
+            "id": "feature_button_text_color_1",
+            "label": "Feature Button Text Color_1",
+            "default": "#FFFFFF"
+        },
+        {
+            "type": "image_picker",
+            "id": "feature_button_icon_1",
+            "label": "Feature Button Icon 1"
+        },
+        
+        {
+            "type": "color",
+            "id": "feature_button_bg_2",
+            "label": "Feature Button BG Color 2",
+            "default": "#52B099"
+        },
+        {
+            "type": "range",
+            "id": "feature_button_radius_2",
+            "label": "Feature Button Radius 2",
+            "max": 40,
+            "min": 0,
+            "default": 12,
+            "step": 1
+        },
+        {
+            "type": "range",
+            "id": "feature_button_padding_2",
+            "label": "Feature Button Paddiing 2",
+            "max": 40,
+            "min": 0,
+            "default": 12,
+            "step": 1
+        },
+
+        {
+            "type": "text",
+            "id": "feature_button_text_2",
+            "label": "Feature Button Text 2",
+            "default": "Plan a service meeting."
+        },
+        
+        {
+            "type": "color",
+            "id": "feature_button_text_color_2",
+            "label": "Feature Button Text Color_2",
+            "default": "#FFFFFF"
+        },
+        {
+            "type": "image_picker",
+            "id": "feature_button_icon_2",
+            "label": "Feature Button Icon 2"
+        },
+
+        {
+        "type": "range",
+        "id": "hero_features_button_gap",
+        "label": "Hero Features Button Gap",
+        "default": 12,
+        "max": 60,
+        "min": 0,
+        "step": 1
+    },
+
+
+
+        {
+            "type": "header",
+            "content": "Search Bar Content & Styles"
+        },
+        {
+            "type": "color",
+            "id": "search_bar_bg",
+            "label": "Search Bar BG Color",
+            "default": "#ffffff"
+        },
+        {
+            "type": "range",
+            "id": "search_bar_radius",
+            "label": "Search Bar Radius",
+            "default": 12,
+            "max": 40,
+            "min": 0,
+            "step": 1
+        },
+        {
+            "type": "image_picker",
+            "id": "search_bar_icon",
+            "label": "Search Bar Icon"
+        },
+        {
+            "type": "range",
+            "id": "search_bar_padding",
+            "label": "Search Bar Padding",
+            "default": 12,
+            "max": 40,
+            "min": 0,
+            "step": 1
+        },
+        {
+            "type": "text",
+            "id": "search_bar_text",
+            "label": "Search Bar Text",
+            "default": "What are you looking for?"
+        },
+        {
+            "type": "color",
+            "id": "search_bar_button_bg",
+            "label": "Search Bar Button BG Color",
+            "default": "#06123D"
+        },
+        {
+            "type": "color",
+            "id": "search_bar_button_text_color",
+            "label": "Search Bar Button Text Color",
+            "default": "#ffffff"
+        },
+        {
+            "type": "range",
+            "id": "search_bar_button_radius",
+            "label": "Search Bar Button Radius",
+            "default": 12,
+            "max": 40,
+            "min": 0,
+            "step": 1
+        },
+        {
+            "type": "range",
+            "id": "search_bar_button_padding",
+            "label": "Search Bar Button Padding",
+            "default": 12,
+            "max": 40,
+            "min": 0,
+            "step": 1
+        },
+        {
+            "type": "text",
+            "id": "search_bar_button_text",
+            "label": "Search Bar Button Text",
+            "default": "SEARCH"
+        },
+        {
+            "type": "image_picker",
+            "id": "search_bar_button_icon",
+            "label": "Search Bar Button Icon"
+        },
+
+        {
+            "type": "header",
+            "content": "Section Styles & Settings"
+        },
+
+        {
+            "type": "select",
+            "id": "section_width",
+            "label": "Section Width",
+            "options": [
+                {"label": "Full Width", "value": "100%"},
+                {"label": "Larger", "value": "1600px"},
+                {"label": "Large", "value": "1440px"},
+                {"label": "Medium", "value": "1370px"},
+                {"label": "Small", "value": "1200px"}
+            ],
+            "default": "1200px"
+        },
+        {
+            "type": "color_scheme",
+            "id": "color_scheme",
+            "label": "Section Background",
+            "default": "scheme-1"
+        },
+        {
+            "type": "range",
+            "id": "slide_radius",
+            "label": "Slider Images Radius",
+            "min": 0,
+            "max": 400,
+            "default": 200,
+            "step": 50
+
+        }, 
+        {
+            "type": "range",
+            "id": "slider_height",
+            "label": "Slider Images Radius",
+            "min": 0,
+            "max": 1,
+            "default": 0.5,
+            "step": 0.1
+
+        },
+        {
+            "type": "text",
+            "id": "slider_width",
+            "label": "Slider Width",
+            
+            "default": "1200px"
+            
+
+        }
+        
+
+
+        
+        ],
+        "presets": [
+            {
+                "name": "Hero Banner"
+            }
+        ],
+        "blocks": [
+            {
+                "type": "slide",
+                "name": "Slide",
+                "settings": [
+                    {
+                        "type": "image_picker",
+                        "id": "slide",
+                        "label": "Slide"
+
+                    }
+                ]
+            }
+        ]
+}
+
+    
+{% endschema %}
